@@ -1,0 +1,20 @@
+{
+    "name": "expensetracker",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "express": "^4.17.1",
+        "mongoose": "^5.10.9"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
+}
