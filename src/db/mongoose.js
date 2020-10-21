@@ -10,3 +10,4 @@ mongoose
     .then(() => {
         console.log('DB connect successfully!')
     })
+    .catch(e => console.log(e))
