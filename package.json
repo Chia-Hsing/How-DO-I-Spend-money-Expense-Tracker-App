@@ -1,24 +1,28 @@
 {
-    "name": "expensetracker",
+    "name": "expense-tracker",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "start": "node src/index.js",
-        "dev": "nodemon src/index.js"
+        "dev": "nodemon -r dotenv/config src/index.js -e js,handlebars dotenv_config_path=/Users/ChiaHsing/Projects/NodeJS/ExpenseTracker/config/dev.env"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
         "connect-flash": "^0.1.1",
+        "csurf": "^1.11.0",
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "express-handlebars": "^5.1.0",
+        "express-session": "^1.17.1",
         "express-validator": "^6.6.1",
         "mongoose": "^5.10.9",
         "passport": "^0.4.1",
         "passport-facebook": "^3.0.0",
-        "passport-local": "^1.0.0",
-        "validator": "^13.1.17"
+        "passport-local": "^1.0.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.6"

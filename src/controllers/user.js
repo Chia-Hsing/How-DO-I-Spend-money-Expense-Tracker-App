@@ -6,11 +6,10 @@ const postSignup = async (req, res) => {
     const user = new User({ ...req.body })
     // get error Object from express-validator
     const result = validationResult(req)
-    console.log(result)
 
     // use isEmpty method from express-validator to determine whether error Object is empty
     if (!result.isEmpty()) {
-        return res.status(400).send('Hey')
+        return res.status(400).render('signup', {})
     }
 
     try {

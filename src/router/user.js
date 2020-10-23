@@ -1,7 +1,7 @@
 const express = require('express')
 const userController = require('../controllers/user')
-const { body } = require('express-validator')
 const passport = require('passport')
+const { body } = require('express-validator')
 
 const router = new express.Router()
 
@@ -28,6 +28,7 @@ router.post(
     ],
     userController.postSignup
 )
+
 router.post(
     '/login',
     passport.authenticate(

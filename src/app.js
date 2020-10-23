@@ -3,35 +3,51 @@ const express = require('express')
 const userRouter = require('./router/user')
 const expenseRouter = require('./router/expense')
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+const session = require('express-session')
+const bodyParser = require('body-parser')
+const connectFlash = require('connect-flash')
+const exphbs = require('express-handlebars')
+
+// passport strategies configuration
+require('../config/passport')(passport)
+// database connection
 require('./db/mongoose')
 
 const app = express()
 
-const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, 'views')
+const partialsPath = path.join(__dirname, 'views')
+app.engine('handlebars', exphbs())
+app.set('view engine', 'handlebars')
+app.set('views', viewsPath)
 
+// use static files
+const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.static(publicDirectoryPath))
-app.use(express.json())
-app.use('/expense', expenseRouter)
-app.use('/user', userRouter)
+
+// use express-session
+app.use(
+    session({
+        secret: 'goaheadluckyboy',
+        resave: false,
+        saveUninitialized: false,
+    })
+)
+
+// parse requests where the Content-Type is application/json
+app.use(bodyParser.json())
+// parse requests where the Content-Type is application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// passport session initialized
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.use(
-    new LocalStrategy(function (username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) {
-                return done(err)
-            }
-            if (!user) {
-                return done(null, false)
-            }
-            if (!user.verifyPassword(password)) {
-                return done(null, false)
-            }
-            return done(null, user)
-        })
-    })
-)
+// routers
+app.use('/expense', expenseRouter)
+app.use('/user', userRouter)
+
+// use connect-flash in order to store message in the session for later display to the client
+app.use(connectFlash())
 
 module.exports = app
