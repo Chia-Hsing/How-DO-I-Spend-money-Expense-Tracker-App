@@ -15,11 +15,18 @@ require('./db/mongoose')
 
 const app = express()
 
+// handlebars initial setting
 const viewsPath = path.join(__dirname, 'views')
-const partialsPath = path.join(__dirname, 'views')
-app.engine('handlebars', exphbs())
+const partialsPath = path.join(__dirname, 'views/partials')
+app.engine(
+    'handlebars',
+    exphbs({
+        layoutsDir: viewsPath,
+        partialsDir: partialsPath,
+        defaultLayout: 'main',
+    })
+)
 app.set('view engine', 'handlebars')
-app.set('views', viewsPath)
 
 // use static files
 const publicDirectoryPath = path.join(__dirname, '../public')
