@@ -5,6 +5,9 @@ const { body } = require('express-validator')
 
 const router = new express.Router()
 
+router.get('/signup', userController.getSignup)
+router.get('/login', userController.getLogin)
+
 router.post(
     '/signup',
     [
@@ -19,9 +22,9 @@ router.post(
             // if pass the validation, must return true
             return true
         }),
-        body('password__check').custom((value, { req }) => {
+        body('password__recheck').custom((value, { req }) => {
             if (value !== req.body.password) {
-                throw new Error('password__check invalid')
+                throw new Error('password__recheck invalid')
             }
             return true
         }),

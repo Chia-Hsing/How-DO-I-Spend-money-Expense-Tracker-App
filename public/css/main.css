@@ -1,0 +1,20 @@
+* {
+    font-family: 'Tinos', serif;
+}
+
+body {
+    background: rgb(245, 243, 223);
+    width: 100vw;
+    height: auto;
+}
+
+.C {
+    width: 800px;
+    height: 800px;
+    background-color: rgb(255, 81, 0);
+    position: fixed;
+    top: -30%;
+    left: 10%;
+    border-radius: 1000px;
+    overflow: hidden;
+}

@@ -1,1 +1,39 @@
+<main class="form-wrap container-fluid">
+  <h2>Log in</h2>
+  <form action="/user/login" method="post" class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="form-group row">
+        <label for="form_username">Username</label>
+        <input type="text" name="form_username" class="form-control" id="form_username"   placeholder="Username" value="{{user.username}}" required>
+        <div class="valid-feedback">
+          good!
+        </div>
+        <div class="invalid-feedback">
+          invalid username!
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="form_password">Password</label>
+        <input type="text" name="form_password" class="form-control" id="form_password" value="{{user.password}}" placeholder="password" required>
+        <div class="valid-feedback">
+          good!
+        </div>
+        <div class="invalid-feedback">
+          Please provide a valid password!
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="btn_group">
+      <button class="btn_signup btn-primary btn-sm btn-rounded" type="submit">Log in</button>
+      <button class="btn_fb btn btn-primary btn-sm btn-rounded" type="submit"><span class="iconify" data-icon="fa:facebook" data-inline="false"></span></button>
+    </div>
+  </form>
+  <div class="form_aside">
+    <aside><span>Do not have a account? </span><a href="/user/signup"><strong>Sign up</strong></a></aside>
+    <aside><span>Forgot password? </span><a href="/user/reset_password"><strong>Reset</strong></a></aside>
+  </div>
+</main>
 
+
+ {{!-- <div>12345</div> --}}
