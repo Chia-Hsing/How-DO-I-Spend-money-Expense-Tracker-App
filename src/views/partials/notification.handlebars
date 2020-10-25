@@ -1,15 +1,21 @@
 {{#if warning}}
-<section class="notification">
-    <div>
+<section class="notification alert alert-secondary" role="alert">
+    <em>
         {{warning}}
-    </div>
+    </em>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </section>
 {{/if}}
 
 {{#each errors}}
-<section class="notification">
-    <div>
+<section class="notification alert alert-secondary" role="alert">
+    <em>
         {{this.msg}}
-    </div>
+    </em>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </section>
 {{/each}}

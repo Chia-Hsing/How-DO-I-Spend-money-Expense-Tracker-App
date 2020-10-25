@@ -6,6 +6,7 @@ const getSignup = (req, res) => {
         // should signup stylesheet and validation function apply?
         validationFormCSS: true,
         validationFormJS: true,
+        signUpDecorationCSS: true,
     })
 }
 const getLogin = async (req, res) => {
@@ -13,6 +14,7 @@ const getLogin = async (req, res) => {
         // should login stylesheet and validation function apply?
         validationFormCSS: true,
         validationFormJS: true,
+        logInDecorationCSS: true,
     })
 }
 const getLogout = async (req, res) => {
@@ -34,6 +36,7 @@ const postSignup = async (req, res) => {
         return res.status(400).render('signup', {
             validationFormCSS: true,
             validationFormJS: true,
+            signUpDecorationCSS: true,
             // array(): one of the methods of express-validator
             errors: result.array(),
             // represent the same input value after submit
