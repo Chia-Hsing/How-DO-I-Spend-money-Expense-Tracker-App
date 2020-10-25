@@ -34,18 +34,14 @@ router.post(
 
 router.post(
     '/login',
-    passport.authenticate(
-        'local',
-        {
-            successRedirect: '/',
-            failureRedirect: '/users/login',
-            failureFlash: true,
-        },
-        () => {
-            console.log('success')
-        }
-    ),
-    userController.postLogin
+    passport.authenticate('local', {
+        successRedirect: '/user/signup',
+        failureRedirect: '/user/login',
+        failureFlash: true,
+    }),
+    (req, res) => {
+        console.log(req.body)
+    }
 )
 
 module.exports = router

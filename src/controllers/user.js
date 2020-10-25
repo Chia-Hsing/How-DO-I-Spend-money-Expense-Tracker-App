@@ -3,13 +3,15 @@ const { validationResult } = require('express-validator')
 
 const getSignup = (req, res) => {
     res.render('signup', {
-        // should signup stylesheet apply?
+        // should signup stylesheet and validation function apply?
         validationFormCSS: true,
+        validationFormJS: true,
     })
 }
 const getLogin = async (req, res) => {
     res.render('login', {
-        // should signup stylesheet apply?
+        // should login stylesheet and validation function apply?
+        validationFormCSS: true,
         validationFormCSS: true,
     })
 }
@@ -25,12 +27,13 @@ const postSignup = async (req, res) => {
     const user = new User({ ...req.body })
     // get error Object from express-validator
     const result = validationResult(req)
-
     const { username, email, password, password__recheck } = user
+
     // use isEmpty method from express-validator to determine whether error Object is empty
     if (!result.isEmpty()) {
         return res.status(400).render('signup', {
             validationFormCSS: true,
+            validationFormJS: true,
             errors: result.array(),
             // represent the same input value after submit
             user: { username, email, password, password__recheck },
@@ -40,7 +43,8 @@ const postSignup = async (req, res) => {
     try {
         const email = await User.findOne({ email: req.body.email })
         if (email) {
-            return res.status(400).send('Email address already existed!')
+            req.flash('warning', 'Email address already exist!')
+            return res.redirect('user/login')
         }
 
         // save user from request to database
@@ -48,18 +52,10 @@ const postSignup = async (req, res) => {
         res.status(201).send(user)
     } catch (e) {
         res.status(404).send(e)
+        return res.redirect('user/signup')
     }
 }
 // ----------------------------------------
-
-const postLogin = async (req, res) => {
-    try {
-        const user = await User.findByCredentials(req.body.email, req.body.password)
-        res.status(200).send(user)
-    } catch (e) {
-        req.status(400).send(e)
-    }
-}
 
 const postLogout = async (req, res) => {}
 const postNewPassword = async (req, res) => {}
@@ -67,7 +63,6 @@ const postResetPassword = async (req, res) => {}
 
 module.exports = {
     postSignup,
-    postLogin,
     postLogout,
     postNewPassword,
     postResetPassword,
