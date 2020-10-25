@@ -15,14 +15,14 @@ module.exports = passport => {
                         return done(err)
                     }
                     if (!user) {
-                        return done(null, false, req.flash('warning', 'Invalid email address or password!'))
+                        return done(null, false, req.flash('warning', 'Email address does not exist, please sign up!'))
                     }
 
-                    const isMatch = bcryptjs.compare(password, user.password)
-
-                    if (isMatch) {
-                        return done(null, user)
-                    }
+                    bcryptjs.compare(password, user.password, (err, res) => {
+                        if (res) {
+                            return done(null, user)
+                        }
+                    })
 
                     return done(null, false, req.flash('warning', 'Invalid email address or password!'))
                 })

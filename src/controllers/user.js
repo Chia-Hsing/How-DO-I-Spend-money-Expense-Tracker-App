@@ -12,7 +12,7 @@ const getLogin = async (req, res) => {
     res.render('login', {
         // should login stylesheet and validation function apply?
         validationFormCSS: true,
-        validationFormCSS: true,
+        validationFormJS: true,
     })
 }
 const getLogout = async (req, res) => {
@@ -34,6 +34,7 @@ const postSignup = async (req, res) => {
         return res.status(400).render('signup', {
             validationFormCSS: true,
             validationFormJS: true,
+            // array(): one of the methods of express-validator
             errors: result.array(),
             // represent the same input value after submit
             user: { username, email, password, password__recheck },
@@ -43,16 +44,16 @@ const postSignup = async (req, res) => {
     try {
         const email = await User.findOne({ email: req.body.email })
         if (email) {
-            req.flash('warning', 'Email address already exist!')
-            return res.redirect('user/login')
+            req.flash('warning', 'Email address already exist, please log in!')
+            return res.status(400).redirect('/user/signup')
         }
 
         // save user from request to database
         await user.save()
-        res.status(201).send(user)
+        return res.status(201).redirect('/user/login')
     } catch (e) {
         res.status(404).send(e)
-        return res.redirect('user/signup')
+        return res.redirect('/user/signup')
     }
 }
 // ----------------------------------------

@@ -48,7 +48,7 @@ app.use(passport.session())
 
 app.use((req, res, next) => {
     res.locals.user = req.user
-    res.locals.reminder = req.flash('warning')
+    res.locals.warning = req.flash('warning')
     res.locals.success = req.flash('success')
     next()
 })

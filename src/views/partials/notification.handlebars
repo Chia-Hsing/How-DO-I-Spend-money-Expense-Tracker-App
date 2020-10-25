@@ -1,0 +1,15 @@
+{{#if warning}}
+<section class="notification">
+    <div>
+        {{warning}}
+    </div>
+</section>
+{{/if}}
+
+{{#each errors}}
+<section class="notification">
+    <div>
+        {{this.msg}}
+    </div>
+</section>
+{{/each}}
