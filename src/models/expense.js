@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
+const User = require('./user')
 
 const expenseSchema = new mongoose.Schema({
     expense: {
@@ -10,11 +10,11 @@ const expenseSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0,
-        validator(value) {
-            if (value < 0) {
-                throw new Error('Expense amount must be positive.')
-            }
-        },
+        // validator(value) {
+        //     if (value < 0) {
+        //         throw new Error('Expense amount must be positive.')
+        //     }
+        // },
     },
     date: {
         type: Date,
@@ -26,6 +26,11 @@ const expenseSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
     },
 })
 

@@ -7,6 +7,7 @@ const router = new express.Router()
 
 router.get('/signup', userController.getSignup)
 router.get('/login', userController.getLogin)
+router.get('/logout', userController.getLogout)
 
 router.post(
     '/signup',
@@ -32,10 +33,11 @@ router.post(
     userController.postSignup
 )
 
+//By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked. If authentication succeeds, the next handler will be invoked and the req.user property will be set to the authenticated user.
 router.post(
     '/login',
-    passport.authenticate('local', {
-        successRedirect: '/user',
+    passport.authenticate('login', {
+        successRedirect: '/',
         failureRedirect: '/user/login',
         failureFlash: true,
     })

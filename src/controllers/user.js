@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const { validationResult } = require('express-validator')
 
+// get signup page
 const getSignup = (req, res) => {
     res.render('signup', {
         // should signup stylesheet and validation function apply?
@@ -9,7 +10,9 @@ const getSignup = (req, res) => {
         signUpDecorationCSS: true,
     })
 }
-const getLogin = async (req, res) => {
+
+// get login page
+const getLogin = (req, res) => {
     res.render('login', {
         // should login stylesheet and validation function apply?
         validationFormCSS: true,
@@ -17,13 +20,17 @@ const getLogin = async (req, res) => {
         logInDecorationCSS: true,
     })
 }
-const getLogout = async (req, res) => {
-    req.logout()
-}
-const getNewPassword = async (req, res) => {}
-const getResetPassword = async (req, res) => {}
 
-// user signup handler -------------------
+// Passport provide the logout() function which can remove the req.user property from request Object and clear the login session.
+const getLogout = (req, res) => {
+    req.logout()
+    return res.redirect('/user/login')
+}
+
+// const getNewPassword = async (req, res) => {}
+// const getResetPassword = async (req, res) => {}
+
+// user signup handler
 const postSignup = async (req, res) => {
     // create a new user instance
     const user = new User({ ...req.body })
@@ -48,7 +55,7 @@ const postSignup = async (req, res) => {
         const email = await User.findOne({ email: req.body.email })
         if (email) {
             req.flash('warning', 'Email address already exist, please log in!')
-            return res.status(400).redirect('/user/signup')
+            return res.status(400).redirect('/user/login')
         }
 
         // save user from request to database
@@ -59,20 +66,17 @@ const postSignup = async (req, res) => {
         return res.redirect('/user/signup')
     }
 }
-// ----------------------------------------
 
-const postLogout = async (req, res) => {}
-const postNewPassword = async (req, res) => {}
-const postResetPassword = async (req, res) => {}
+// const postNewPassword = async (req, res) => {}
+// const postResetPassword = async (req, res) => {}
 
 module.exports = {
     postSignup,
-    postLogout,
-    postNewPassword,
-    postResetPassword,
+    // postNewPassword,
+    // postResetPassword,
     getSignup,
     getLogin,
     getLogout,
-    getNewPassword,
-    getResetPassword,
+    // getNewPassword,
+    // getResetPassword,
 }
