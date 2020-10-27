@@ -1,25 +1,40 @@
 const express = require('express')
 const Expense = require('../models/expense')
+const expenseController = require('../controllers/expense')
+const { body } = require('express-validator')
+const isAuthenticated = require('../../public/js/auth')
 require('../db/mongoose')
 
 const router = new express.Router()
 
-router.post('/', async (req, res) => {
-    const expense = new Expense({ ...req.body, owner: req.user._id })
-    try {
-        await expense.save()
-        res.status(201).send(expense)
-    } catch (e) {
-        res.status(404).send(e)
-    }
-})
+router.get('/', isAuthenticated, expenseController.getDailyExpense)
 
-router.get('/:date', async (req, res) => {
-    const date = req.params.date
+router.get('/newExpense', expenseController.getCreateExpense)
 
-    const expense = await Expense.find({ date: date })
-    res.send(expense)
-})
+router.post(
+    '/newExpense',
+    [
+        body('name').trim().isLength({ min: 1 }).withMessage('Expense field is required!'),
+        body('amount').trim().isInt({ min: 1 }).withMessage('Amount field must be a positive integer!'),
+        body('date').isISO8601().withMessage('Invalid date value!'),
+        body('category')
+            .not()
+            .isIn([
+                'food',
+                'entertaining',
+                'clothes',
+                'knowledge',
+                'transportation',
+                'home supplies',
+                'healthcare',
+                'housing',
+            ])
+            .withMessage('Please provide a valid category!'),
+    ],
+    expenseController.postCreateExpense
+)
+
+// router.get('/:date', expenseController.getDailyExpense)
 
 // router.patch('/:id', (req, res) => {})
 

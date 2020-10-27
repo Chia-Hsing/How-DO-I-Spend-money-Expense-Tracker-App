@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const User = require('./user')
 
 const expenseSchema = new mongoose.Schema({
-    expense: {
+    name: {
         type: String,
         required: true,
     },
@@ -10,11 +10,6 @@ const expenseSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0,
-        // validator(value) {
-        //     if (value < 0) {
-        //         throw new Error('Expense amount must be positive.')
-        //     }
-        // },
     },
     date: {
         type: Date,

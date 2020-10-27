@@ -2,12 +2,12 @@ const path = require('path')
 const express = require('express')
 const userRouter = require('./router/user')
 const expenseRouter = require('./router/expense')
-const homepageRouter = require('./router/homepage')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const exphbs = require('express-handlebars')
+const date = require('../public/js/date')
 
 // database connection
 require('./db/mongoose')
@@ -49,13 +49,13 @@ app.use(flash())
 
 app.use((req, res, next) => {
     res.locals.user = req.user
+    res.locals.today = date()
     res.locals.warning = req.flash('warning')
     res.locals.success = req.flash('success')
     next()
 })
 
 // routers
-app.use('/', homepageRouter)
 app.use('/expense', expenseRouter)
 app.use('/user', userRouter)
 
