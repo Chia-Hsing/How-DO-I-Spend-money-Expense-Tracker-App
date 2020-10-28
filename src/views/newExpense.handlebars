@@ -2,59 +2,62 @@
 <main class="form-wrap container-fluid">
   <h2>Add A New Expense</h2>
   {{> notification}}
-  <form action="/expense" method="post" class="needs-validation" novalidate>
+  <form action="/expense/newExpense" method="post" class="needs-validation" novalidate>
     <div class="form-row">
       <div class="form-group row">
-        <label for="form_username">Username</label>
-        <input type="text" name="username" class="form-control" id="form_username"   placeholder="Username" value="{{user.username}}" required>
+        <label for="form_name">name</label>
+        <input type="text" name="name" class="form-control" id="form_name"   placeholder="Expense Name" value="{{expense.name}}" required>
         <div class="valid-feedback">
           Good!
         </div>
         <div class="invalid-feedback">
-          Invalid username!
+          Expense name field is required!!
         </div>
       </div>
       <div class="form-group row">
-        <label for="form_email">Email</label>
-        <input type="email" name="email" class="form-control" id="form_email" value="{{user.email}}" placeholder="Email Address" required>
+        <label for="form_amount">Amount</label>
+        <input type="number" name="amount" class="form-control" id="form_amount" value="{{expense.amount}}" placeholder="Amount" required>
         <div class="valid-feedback">
           Good!
         </div>
         <div class="invalid-feedback">
-          Invalid email address!
+          Invalid amount!
         </div>
       </div>
       <div class="form-group row">
-        <label for="form_password">Password</label>
-        <input type="password" name="password" class="form-control" id="form_password" value="{{user.password}}" placeholder="password" pattern="^\S{8,12}$" required>
+        <label for="form_date">Date</label>
+        <input type="date" name="date" class="form-control" id="form_date" value="{{expense.date}}" min="2015-01-01" max="2029-12-31" required>
+      </div>
+      <div class="form-group row">
+        <label for="form_category">Confirm Password</label>
+        <select name="category" class="form-control" id="form_category" required>
+          <option value="" selected>Categories</option>
+          <option value="food" {{isSelected expense.category "food"}}>food</option>
+          <option value="entertaining" {{isSelected expense.category "entertaining"}}>entertaining</option>
+          <option value="clothes" {{isSelected expense.category "clothes"}}>clothes</option>
+          <option value="knowledge" {{isSelected expense.category "knowledge"}}>knowledge</option>
+          <option value="transportation" {{isSelected expense.category "transportation"}}>transportation</option>
+          <option value="home_supplies" {{isSelected expense.category "home_supplies"}}>home supplies</option>
+          <option value="healthcare" {{isSelected expense.category "healthcare"}}>healthcare</option>
+          <option value="housing" {{isSelected expense.category "housing"}}>housing</option>
+        </select>
         <div class="valid-feedback">
           Good!
         </div>
         <div class="invalid-feedback">
-          Please provide a valid password!
+          Must choose one category.
         </div>
       </div>
       <div class="form-group row">
-        <label for="form_password_recheck">Confirm Password</label>
-        <input type="password" name="password__recheck" class="form-control" id="form_password_recheck" value="{{user.password__recheck}}" placeholder="confirm password" required>
-        <div class="valid-feedback">
-          Good!
-        </div>
-        <div class="invalid-feedback">
-          Password does not match.
-        </div>
+        <label for="form_description">Description</label>
+        <textarea type="text" name="description" class="form-control" id="form_description" value="{{expense.description}}"></textarea>>
       </div>
     </div>
     </div>
     <div class="btn_group">
-      <button class="btn_signup btn-primary btn-sm btn-rounded" type="submit">Sign up</button>
-      <button class="btn_fb btn btn-primary btn-sm btn-rounded" type="submit"><span class="iconify" data-icon="fa:facebook" data-inline="false"></span></button>
+      <button class="btn_signup btn-primary btn-sm btn-rounded" type="submit">Submit</button>
     </div>
   </form>
-  <div class="form_aside">
-    <aside><span>Have a account? </span><a href="/user/login"><strong>Log in</strong></a></aside>
-    <aside><span>Forgot password? </span><a href="/user/reset_password"><strong>Reset</strong></a></aside>
-  </div>
 </main>
 
 

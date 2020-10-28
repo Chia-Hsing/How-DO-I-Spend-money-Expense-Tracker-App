@@ -7,18 +7,27 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const exphbs = require('express-handlebars')
-const date = require('../public/js/date')
+const date = require('./utils/date')
 
 // database connection
 require('./db/mongoose')
 // passport strategies configuration
-require('../public/js/passport')(passport)
+require('./middleware/passport')(passport)
 
 const app = express()
 
 // handlebars initial setting
 const viewsPath = path.join(__dirname, './views')
-app.engine('handlebars', exphbs())
+app.engine(
+    'handlebars',
+    exphbs({
+        helpers: {
+            isSelected: (selectedCategory, option) => {
+                return selectedCategory === option ? 'selected' : ''
+            },
+        },
+    })
+)
 app.set('view engine', 'handlebars')
 app.set('views', viewsPath)
 
