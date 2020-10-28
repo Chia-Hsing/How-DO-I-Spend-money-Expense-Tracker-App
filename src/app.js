@@ -7,7 +7,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const exphbs = require('express-handlebars')
-const date = require('./utils/date')
+const timeFormat = require('./utils/date')
 
 // database connection
 require('./db/mongoose')
@@ -24,6 +24,9 @@ app.engine(
         helpers: {
             isSelected: (selectedCategory, option) => {
                 return selectedCategory === option ? 'selected' : ''
+            },
+            formatDate: date => {
+                return timeFormat(date)
             },
         },
     })
@@ -58,7 +61,7 @@ app.use(flash())
 
 app.use((req, res, next) => {
     res.locals.user = req.user
-    res.locals.today = date()
+    res.locals.today = timeFormat()
     res.locals.warning = req.flash('warning')
     res.locals.success = req.flash('success')
     next()

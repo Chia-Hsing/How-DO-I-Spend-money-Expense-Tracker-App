@@ -2,7 +2,7 @@ const express = require('express')
 const userController = require('../controllers/user')
 const passport = require('passport')
 const { body } = require('express-validator')
-const date = require('../utils/date')
+const timeFormat = require('../utils/date')
 
 const router = new express.Router()
 
@@ -35,7 +35,7 @@ router.post(
 )
 
 //By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked. If authentication succeeds, the next handler will be invoked and the req.user property will be set to the authenticated user.
-const formatDate = date()
+const formatDate = timeFormat()
 
 router.post(
     '/login',

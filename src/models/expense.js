@@ -11,7 +11,7 @@ const expenseSchema = new mongoose.Schema({
         default: 0,
     },
     date: {
-        type: Date,
+        type: String,
         require: true,
     },
     category: {
@@ -24,6 +24,7 @@ const expenseSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        index: true,
         ref: 'User',
     },
 })

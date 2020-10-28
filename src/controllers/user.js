@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator')
 const getSignup = (req, res) => {
     res.render('signup', {
         // should signup stylesheet and validation function apply?
-        validationFormCSS: true,
+        formCSS: true,
         validationFormJS: true,
         signUpDecorationCSS: true,
     })
@@ -15,7 +15,7 @@ const getSignup = (req, res) => {
 const getLogin = (req, res) => {
     res.render('login', {
         // should login stylesheet and validation function apply?
-        validationFormCSS: true,
+        formCSS: true,
         validationFormJS: true,
         logInDecorationCSS: true,
     })
@@ -41,7 +41,7 @@ const postSignup = async (req, res) => {
     // use isEmpty method from express-validator to determine whether error Object is empty
     if (!result.isEmpty()) {
         return res.status(400).render('signup', {
-            validationFormCSS: true,
+            formCSS: true,
             validationFormJS: true,
             signUpDecorationCSS: true,
             // array(): one of the methods of express-validator

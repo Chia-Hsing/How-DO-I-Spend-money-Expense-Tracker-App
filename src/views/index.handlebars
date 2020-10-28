@@ -7,6 +7,13 @@
         </div>
     </nav>
     <section>
-        <div></div>
+        {{#if noExpense}}
+        <div>You did not spend any money yet!</div>
+        {{/if}}
+        {{#each expense}}
+            {{this.name}}
+            {{this.amount}}
+            {{this.category}}
+        {{/each}}
     </section>
 </main>

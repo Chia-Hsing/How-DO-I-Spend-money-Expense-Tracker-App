@@ -1,11 +1,11 @@
-
 <main class="form-wrap container-fluid">
   <h2>Add A New Expense</h2>
   {{> notification}}
+  <div><a href="javascript:history.back()"><span class="iconify" data-icon="ic:sharp-arrow-back-ios" data-inline="false"></span></a></div>
   <form action="/expense/newExpense" method="post" class="needs-validation" novalidate>
     <div class="form-row">
       <div class="form-group row">
-        <label for="form_name">name</label>
+        <label for="form_name">Name</label>
         <input type="text" name="name" class="form-control" id="form_name"   placeholder="Expense Name" value="{{expense.name}}" required>
         <div class="valid-feedback">
           Good!
@@ -26,7 +26,7 @@
       </div>
       <div class="form-group row">
         <label for="form_date">Date</label>
-        <input type="date" name="date" class="form-control" id="form_date" value="{{expense.date}}" min="2015-01-01" max="2029-12-31" required>
+        <input type="date" name="date" class="form-control" id="form_date" value="{{formatDate expense.date}}" min="2015-01-01" max="2029-12-31" readonly>
       </div>
       <div class="form-group row">
         <label for="form_category">Confirm Password</label>
@@ -50,7 +50,7 @@
       </div>
       <div class="form-group row">
         <label for="form_description">Description</label>
-        <textarea type="text" name="description" class="form-control" id="form_description" value="{{expense.description}}"></textarea>>
+        <textarea type="text" name="description" class="form-control" id="form_description" value="{{expense.description}}"></textarea>
       </div>
     </div>
     </div>
@@ -59,6 +59,5 @@
     </div>
   </form>
 </main>
-
 
 
