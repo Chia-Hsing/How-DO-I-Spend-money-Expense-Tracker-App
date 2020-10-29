@@ -35,15 +35,17 @@ router.post(
 )
 
 //By default, if authentication fails, Passport will respond with a 401 Unauthorized status, and any additional route handlers will not be invoked. If authentication succeeds, the next handler will be invoked and the req.user property will be set to the authenticated user.
-const formatDate = timeFormat()
 
 router.post(
     '/login',
     passport.authenticate('login', {
-        successRedirect: `/expense?date=${formatDate}`,
         failureRedirect: '/user/login',
         failureFlash: true,
-    })
+    }),
+    (req, res) => {
+        const formatDate = timeFormat()
+        return res.redirect(`/expense?date=${formatDate}`)
+    }
 )
 
 module.exports = router

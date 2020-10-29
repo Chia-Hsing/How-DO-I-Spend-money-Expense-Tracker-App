@@ -29,7 +29,7 @@
         <input type="date" name="date" class="form-control" id="form_date" value="{{formatDate expense.date}}" min="2015-01-01" max="2029-12-31" readonly>
       </div>
       <div class="form-group row">
-        <label for="form_category">Confirm Password</label>
+        <label for="form_category">Category</label>
         <select name="category" class="form-control" id="form_category" required>
           <option value="" selected>Categories</option>
           <option value="food" {{isSelected expense.category "food"}}>food</option>

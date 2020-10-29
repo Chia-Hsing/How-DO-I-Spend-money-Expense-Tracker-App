@@ -58,6 +58,7 @@ input.form-control:focus {
 }
 
 .btn_signup,
+.btn_login,
 .btn_fb {
     flex-basis: 40%;
     height: 40px;
@@ -71,9 +72,23 @@ input.form-control:focus {
     flex-basis: 20%;
 }
 
+.btn_fb .iconify {
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+    color: #fff;
+}
+
 .btn_signup:hover,
+.btn_login:hover,
 .btn_fb:hover {
     background-color: rgb(252, 125, 94);
+}
+
+.btn_signup:active,
+.btn_login:active,
+.btn_fb:active {
+    background-color: rgb(252, 125, 94) !important;
 }
 
 .form_aside {
