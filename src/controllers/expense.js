@@ -5,7 +5,6 @@ const getDailyExpense = async (req, res) => {
     const currentDate = req.query.date
     const { _id } = req.user
 
-    console.log(currentDate)
     if (!currentDate || !_id) {
         return res.redirect('/user/login', req.flash('warning', 'Client should log in first!'))
     }
@@ -17,13 +16,17 @@ const getDailyExpense = async (req, res) => {
         if (expense.length === 0) {
             return res.render('index', {
                 noExpense: true,
+                logout: true,
                 searchJS: true,
+                indexCSS: true,
                 currentDate,
             })
         }
 
         return res.render('index', {
+            logout: true,
             searchJS: true,
+            indexCSS: true,
             expense,
             currentDate,
         })
@@ -37,6 +40,7 @@ const getNewExpense = (req, res) => {
     res.render('newExpense', {
         formCSS: true,
         validationFormJS: true,
+        signUpDecorationCSS: true,
         currentDate,
     })
 }

@@ -1,0 +1,11 @@
+.D {
+    width: 800px;
+    height: 800px;
+    background-color: rgb(255, 81, 0);
+    position: fixed;
+    top: -30%;
+    left: 10%;
+    border-radius: 1000px;
+    overflow: hidden;
+    z-index: -10;
+}

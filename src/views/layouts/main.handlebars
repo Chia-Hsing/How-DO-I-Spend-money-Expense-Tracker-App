@@ -10,18 +10,30 @@
         {{#if formCSS}}
         <link rel="stylesheet" href="/css/form.css">
         {{/if}}
+        {{#if indexCSS}}
+        <link rel="stylesheet" href="/css/index.css">
+        {{/if }}
+        {{#if logInDecorationCSS}}
+        <link rel="stylesheet" href="/css/loginDeco.css">
+        {{/if}}
+         {{#if signUpDecorationCSS}}
+        <link rel="stylesheet" href="/css/signupDeco.css">
+        {{/if}}
+
     </head>
     <body>
         {{!-- <nav class="nav">
             <h4 class="title"><a href="/user/login">How I Spend Money</a></h4>
         </nav> --}}
-        {{#if logInDecorationCSS}}
         <div class="A"></div>
         <div class="B"></div>
         <div class="C"></div>
-        {{/if}}
-        {{#if signUpDecorationCSS}}
         <div class="D"></div>
+
+        {{#if logout}}
+        <nav class="nav">
+            <div class="logout"><a href="/user/logout">log out</a></div>
+        </nav>
         {{/if}}
 
 

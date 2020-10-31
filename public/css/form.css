@@ -109,6 +109,7 @@ input.form-control:focus {
 .btn_login:hover,
 .btn_fb:hover {
     background-color: rgb(252, 125, 94);
+    cursor: pointer;
 }
 
 .btn_signup:active,

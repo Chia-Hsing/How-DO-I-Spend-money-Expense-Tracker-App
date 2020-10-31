@@ -13,54 +13,28 @@ body {
     font-size: 1.1em;
 }
 
-/* .nav {
+.nav {
+    position: sticky;
+    top: 0;
     width: 100vw;
     height: 40px;
     background-color: #fff;
     padding: 7px 25px;
     visibility: hidden;
+    flex-direction: row-reverse;
 }
 
-.nav .title {
+.nav .logout {
     font-weight: bold;
     visibility: visible;
 }
 
-.nav .title a {
+.nav .logout a {
     text-decoration: none;
     color: #1f1f1f;
-} */
-
-.A {
-    width: 350px;
-    height: 350px;
-    background-color: rgb(255, 81, 0);
-    position: fixed;
-    top: -10%;
-    right: 60%;
-    border-radius: 1000px;
-    overflow: hidden;
+    font-size: 1.5em;
 }
 
-.B {
-    width: 600px;
-    height: 600px;
-    background-color: rgb(255, 81, 0);
-    position: fixed;
-    top: 60%;
-    left: 70%;
-    border-radius: 1000px;
-    overflow: hidden;
-}
-
-.D {
-    width: 800px;
-    height: 800px;
-    background-color: rgb(255, 81, 0);
-    position: fixed;
-    top: -30%;
-    left: 10%;
-    border-radius: 1000px;
-    overflow: hidden;
-    z-index: -10;
+.nav .logout:hover a {
+    color: rgb(255, 81, 0);
 }

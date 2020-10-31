@@ -29,6 +29,33 @@ app.engine(
             formatDate: date => {
                 return timeFormat(date)
             },
+            isToday: (todayDate, otherDate) => {
+                if (todayDate !== otherDate) {
+                    return otherDate
+                } else {
+                    return 'Today'
+                }
+            },
+            categoryIcon: category => {
+                switch (category) {
+                    case 'food':
+                        return `<span class="iconify" data-icon="mdi:food-variant" data-inline="false"></span>`
+                    case 'entertaining':
+                        return `<span class="iconify" data-icon="ri:user-smile-fill" data-inline="false"></span>`
+                    case 'clothes':
+                        return `<span class="iconify" data-icon="maki:clothing-store-15" data-inline="false"></span>`
+                    case 'knowledge':
+                        return `<span class="iconify" data-icon="ic:baseline-menu-book" data-inline="false"></span>`
+                    case 'transportation':
+                        return `<span class="iconify" data-icon="ic:round-directions-transit" data-inline="false"></span>`
+                    case 'home_supplies':
+                        return `<span class="iconify" data-icon="mdi:bottle-tonic" data-inline="false"></span>`
+                    case 'healthcare':
+                        return `<span class="iconify" data-icon="medical-icon:health-services" data-inline="false"></span>`
+                    case 'housing':
+                        return `<span class="iconify" data-icon="ic:sharp-house" data-inline="false"></span>`
+                }
+            },
         },
     })
 )

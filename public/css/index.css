@@ -1,0 +1,148 @@
+.index_wrap {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50px 70px auto;
+    max-width: 700px;
+    margin: 30px auto;
+    background: rgb(255, 255, 255);
+    padding: 30px;
+    opacity: 0.9;
+    box-shadow: 20px 20px 30px rgba(143, 143, 143, 0.541);
+}
+
+.index_wrap nav {
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search_date {
+    flex-basis: 30%;
+    border-radius: 5px;
+    border: 1px solid #1f1f1f;
+}
+
+.btn_add {
+    flex-basis: 30%;
+    height: 40px;
+    border-radius: 20px;
+    background-color: rgb(255, 81, 0);
+    border: none;
+    font-size: 1em;
+}
+
+.btn_add a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btn_add:hover {
+    background-color: rgb(252, 125, 94);
+    cursor: pointer;
+}
+
+h2 {
+    margin: 0 auto;
+    font-weight: bold;
+    color: #1f1f1f;
+    display: inline-block;
+}
+
+.index_container {
+    padding-top: 20px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.index_content {
+    width: 100%;
+}
+
+.items {
+    width: 100%;
+    min-height: 400px;
+}
+
+.item_empty {
+    width: 70%;
+    text-align: center;
+    margin: 100px auto;
+    font-weight: bold;
+}
+
+.item_empty span {
+    font-size: 1.5em;
+}
+
+.item {
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    border-bottom: 1px solid rgb(150, 148, 148);
+    width: 500px;
+    height: 80px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.item #name {
+    font-weight: bold;
+    flex-basis: 30%;
+}
+
+.item #amount {
+    font-size: 0.8em;
+    flex-basis: 20%;
+    font-weight: bold;
+    color: rgb(17, 71, 48);
+}
+
+.item #category {
+    font-size: 0.7em;
+    flex-basis: 20%;
+    color: rgb(150, 148, 148);
+}
+
+.operator {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.A {
+    width: 350px;
+    height: 350px;
+    background-color: rgb(255, 81, 0);
+    position: fixed;
+    top: 60%;
+    right: 80%;
+    border-radius: 1000px;
+    overflow: hidden;
+}
+
+.B {
+    width: 250px;
+    height: 250px;
+    background-color: rgb(255, 81, 0);
+    position: fixed;
+    top: 60%;
+    left: 70%;
+    border-radius: 1000px;
+    overflow: hidden;
+}
+
+.D {
+    width: 550px;
+    height: 550px;
+    background-color: rgb(255, 81, 0);
+    position: fixed;
+    top: -30%;
+    left: 10%;
+    border-radius: 1000px;
+    overflow: hidden;
+    z-index: -10;
+}

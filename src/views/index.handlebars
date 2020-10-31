@@ -1,27 +1,34 @@
-<main class='main_wrap'>
-    <h2><strong>Today</strong></h2>
-    <h4>{{today}}</h4>
-
+<main class='index_wrap'>
+    
+    <h2>{{isToday today currentDate}}</h2>
     <nav>
+        <button class="btn_add btn-sm btn-rounded"><a href='/expense/newExpense?date={{currentDate}}'>Add a New Expense</a></button>
         <input class="search_date" type="date">
-        <div>
-            <button><a href="/expense/newExpense">Add a New Expense</a></button>
-        </div>
     </nav>
-    <section>
-        {{#if noExpense}}
-        <div>You did not spend any money yet!</div>
-        {{/if}}
-        <div>
-        {{#each expense}}
-            <em>
-            {{this.name}}
-            {{this.amount}}
-            {{this.category}}
-            </em>
-        {{/each}}
-        
-        </div>
-        <div><a href="/user/logout">log out</a></div>
-    </section>
+    <div class='index_container'>
+        <section class='index_content'>
+            <div class='items'>
+            {{#if noExpense}}
+            <div class='item_empty'>
+                <span>You did not spend any money yet!</span>
+            </div>
+            {{else}}
+
+                {{#each expense}}
+                <div class='item'>
+                    {{#categoryIcon this.category}}{{/categoryIcon}}
+                    <span id="name">{{this.name}}</span>
+                    <span id="amount">$ {{this.amount}}</span>
+                    <span id="category">{{this.category}}</span>
+                    <div class="operator">
+                        <span class="iconify" data-icon="clarity:edit-line" data-inline="false"></span>
+                        <span class="iconify" data-icon="iwwa:delete" data-inline="false"></span>
+                    </div>
+                </div>
+                {{/each}}
+            {{/if}}    
+            </div>
+        </section>
+    </div>
+    
 </main>
