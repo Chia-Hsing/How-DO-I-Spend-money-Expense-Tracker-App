@@ -43,7 +43,7 @@ app.use(express.static(publicDirectoryPath))
 app.use(
     session({
         secret: 'goaheadluckyboy',
-        resave: false,
+        resave: true,
         saveUninitialized: false,
     })
 )

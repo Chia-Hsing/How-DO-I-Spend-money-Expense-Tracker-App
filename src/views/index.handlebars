@@ -1,7 +1,9 @@
 <main class='main_wrap'>
     <h2><strong>Today</strong></h2>
     <h4>{{today}}</h4>
+
     <nav>
+        <input class="search_date" type="date">
         <div>
             <button><a href="/expense/newExpense">Add a New Expense</a></button>
         </div>
@@ -10,10 +12,16 @@
         {{#if noExpense}}
         <div>You did not spend any money yet!</div>
         {{/if}}
+        <div>
         {{#each expense}}
+            <em>
             {{this.name}}
             {{this.amount}}
             {{this.category}}
+            </em>
         {{/each}}
+        
+        </div>
+        <div><a href="/user/logout">log out</a></div>
     </section>
 </main>

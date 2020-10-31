@@ -1,7 +1,7 @@
 <main class="form-wrap container-fluid">
-  <h2>Add A New Expense</h2>
-  {{> notification}}
-  <div><a href="javascript:history.back()"><span class="iconify" data-icon="ic:sharp-arrow-back-ios" data-inline="false"></span></a></div>
+    <div class="goBack"><a href="javascript:history.back()"><span class="iconify" data-icon="ic:sharp-arrow-back-ios" data-inline="false"></span></a></div>
+    <h2 class="title_new_expense">Add A New Expense</h2>
+    {{> notification}}
   <form action="/expense/newExpense" method="post" class="needs-validation" novalidate>
     <div class="form-row">
       <div class="form-group row">
@@ -26,7 +26,7 @@
       </div>
       <div class="form-group row">
         <label for="form_date">Date</label>
-        <input type="date" name="date" class="form-control" id="form_date" value="{{formatDate expense.date}}" min="2015-01-01" max="2029-12-31" readonly>
+        <input type="date" name="date" class="form-control" id="form_date" value="{{currentDate}}" min="2015-01-01" max="2029-12-31" readonly>
       </div>
       <div class="form-group row">
         <label for="form_category">Category</label>
