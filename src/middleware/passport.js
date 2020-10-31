@@ -35,11 +35,12 @@ module.exports = passport => {
     )
 
     passport.use(
+        'facebookLogin',
         new FacebookStrategy(
             {
                 clientID: process.env.FACEBOOK_APP_ID,
                 clientSecret: process.env.FACEBOOK_APP_SECRET,
-                callbackURL: process.env.CALLBACK_URL,
+                callbackURL: process.env.SERVER_API_URL + '/auth/facebook/callback',
                 profileFields: ['displayName', 'email'],
             },
             async (accessToken, refreshToken, profile, done) => {
@@ -47,16 +48,20 @@ module.exports = passport => {
                 try {
                     user = await User.findOne({ email: profile._json.email })
 
+                    // if user did not sign up before
                     if (!user) {
                         const username = profile._json.name
                         const email = profile._json.email
-                        // create a random character between 1~8.
-                        const pw = Math.random().toString(36).substr(2, 4) + Date.now().toString(36).substr(2, 4)
+                        // create a random string which characters are in 1~9 and a~z.
+                        const pw = Math.random().toString(36).substr(2, 4) + Date.now().toString(36).substr(3, 4)
+                        // create a hash value for the password, and use a callback function to set the user's profile
                         bcrypt.hash(pw, 8, (err, hash) => {
                             const newUser = new User({ username, email, password: hash })
                             newUser.save().then(user => done(null, user))
                         })
+                        return
                     }
+
                     return done(null, user)
                 } catch (e) {
                     return done(e, false)
