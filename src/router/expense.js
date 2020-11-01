@@ -32,10 +32,8 @@ router.post(
     expenseController.postNewExpense
 )
 
-// router.get('/:date', expenseController.getDailyExpense)
-
 // router.patch('/:id', (req, res) => {})
 
-// router.delete('/:id', (req, res) => {})
+router.delete('/delete/:expenseId', expenseController.deleteExpense)
 
 module.exports = router

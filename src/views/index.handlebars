@@ -1,12 +1,12 @@
 <main class='index_wrap'>
     
     <h2>{{isToday today currentDate}}</h2>
+    <h3 class="sum">$ {{sum}}</h3>
     <nav>
         <button class="btn_add btn-sm btn-rounded"><a href='/expense/newExpense?date={{currentDate}}'>Add a New Expense</a></button>
         <input class="search_date" type="date">
     </nav>
-    <div class='index_container'>
-        <section class='index_content'>
+        <section class='index_container'>
             <div class='items'>
             {{#if noExpense}}
             <div class='item_empty'>
@@ -22,12 +22,12 @@
                     <span id="category">{{this.category}}</span>
                     <div class="operator">
                         <span class="iconify" data-icon="clarity:edit-line" data-inline="false"></span>
-                        <span class="iconify" data-icon="iwwa:delete" data-inline="false"></span>
+                        <span class="delete iconify" data-icon="iwwa:delete" data-inline="false"></span>
+                        <input id="delete" type="hidden" value="{{this._id}}">
                     </div>
                 </div>
                 {{/each}}
             {{/if}}    
-            </div>
         </section>
     </div>
     

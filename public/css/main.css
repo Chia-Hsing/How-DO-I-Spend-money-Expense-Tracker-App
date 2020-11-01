@@ -16,7 +16,7 @@ body {
 .nav {
     position: sticky;
     top: 0;
-    width: 100vw;
+    max-width: 100vw;
     height: 40px;
     background-color: #fff;
     padding: 7px 25px;

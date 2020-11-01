@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator')
+const { router } = require('../app')
 const Expense = require('../models/expense')
 
 const getDailyExpense = async (req, res) => {
@@ -13,6 +14,8 @@ const getDailyExpense = async (req, res) => {
         // use lean() to get plain old JavaScript objects not mongoose document class. If we are not executing a query and sending the results without modification, we should use lean().
         const expense = await Expense.find({ owner: { _id }, date: currentDate }).lean()
 
+        let sum
+
         if (expense.length === 0) {
             return res.render('index', {
                 noExpense: true,
@@ -20,8 +23,17 @@ const getDailyExpense = async (req, res) => {
                 searchJS: true,
                 indexCSS: true,
                 currentDate,
+                sum: 0,
             })
         }
+
+        sum = expense
+            .map(obj => {
+                return obj.amount
+            })
+            .reduce((a, c) => {
+                return a + c
+            }, 0)
 
         return res.render('index', {
             logout: true,
@@ -29,6 +41,7 @@ const getDailyExpense = async (req, res) => {
             indexCSS: true,
             expense,
             currentDate,
+            sum,
         })
     } catch (e) {
         res.status(404).send(e)
@@ -70,8 +83,23 @@ const postNewExpense = async (req, res) => {
     }
 }
 
+const deleteExpense = async (req, res) => {
+    try {
+        const expense = await Expense.findOneAndDelete({ _id: req.params.expenseId, owner: req.user._id })
+
+        if (!expense) {
+            return res.status(404).send()
+        }
+
+        return res.send(expense)
+    } catch (e) {
+        return res.status(404).send(e)
+    }
+}
+
 module.exports = {
     getNewExpense,
     postNewExpense,
     getDailyExpense,
+    deleteExpense,
 }

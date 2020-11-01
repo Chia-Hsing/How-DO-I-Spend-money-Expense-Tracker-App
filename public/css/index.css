@@ -1,7 +1,7 @@
 .index_wrap {
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 50px 70px auto;
+    grid-template-rows: 50px 50px auto;
     max-width: 700px;
     margin: 30px auto;
     background: rgb(255, 255, 255);
@@ -11,6 +11,7 @@
 }
 
 .index_wrap nav {
+    padding-top: 10px;
     border-top: 1px solid #000;
     display: flex;
     justify-content: space-between;
@@ -42,26 +43,27 @@
     cursor: pointer;
 }
 
-h2 {
+h2,
+.sum {
     margin: 0 auto;
     font-weight: bold;
     color: #1f1f1f;
     display: inline-block;
 }
 
-.index_container {
-    padding-top: 20px;
-    width: 600px;
-    margin: 0 auto;
+.sum {
+    color: rgb(255, 81, 0);
 }
 
-.index_content {
-    width: 100%;
+.index_container {
+    padding-top: 20px;
+    max-width: 100%;
+    /* margin: 0 auto; */
 }
 
 .items {
     width: 100%;
-    min-height: 400px;
+    min-height: 350px;
 }
 
 .item_empty {
@@ -80,7 +82,6 @@ h2 {
     margin: 10px auto;
     padding: 10px;
     border-bottom: 1px solid rgb(150, 148, 148);
-    width: 500px;
     height: 80px;
     font-size: 1.5em;
     display: flex;
@@ -89,20 +90,26 @@ h2 {
 }
 
 .item #name {
+    text-align: center;
     font-weight: bold;
-    flex-basis: 30%;
+    flex-basis: 25%;
+    flex-grow: 0.8;
 }
 
 .item #amount {
-    font-size: 0.8em;
-    flex-basis: 20%;
+    text-align: center;
+    font-size: 0.9em;
+    flex-basis: 15%;
+    flex-grow: 1;
     font-weight: bold;
     color: rgb(17, 71, 48);
 }
 
 .item #category {
+    text-align: center;
     font-size: 0.7em;
-    flex-basis: 20%;
+    flex-basis: 15%;
+    flex-grow: 1;
     color: rgb(150, 148, 148);
 }
 
@@ -146,3 +153,22 @@ h2 {
     overflow: hidden;
     z-index: -10;
 }
+
+@media (max-width: 600px) {
+    .item #name {
+        font-size: 0.8em;
+    }
+    .item #amount {
+        font-size: 0.7em;
+    }
+
+    .item #category {
+        font-size: 0.6em;
+    }
+    .btn_add {
+        font-size: 0.7em;
+    }
+    svg {
+        font-size: 0.8em;
+    }
+} ;
