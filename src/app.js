@@ -70,7 +70,7 @@ app.use(express.static(publicDirectoryPath))
 app.use(
     session({
         secret: 'goaheadluckyboy',
-        resave: true,
+        resave: false,
         saveUninitialized: false,
     })
 )
@@ -101,3 +101,10 @@ app.use('/user', userRouter)
 app.use('/auth', authRouter)
 
 module.exports = app
+
+// delete
+// edit
+// monthly search
+// chart
+// reset pw
+// csrf

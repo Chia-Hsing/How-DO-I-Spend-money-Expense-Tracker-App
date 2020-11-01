@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator')
-const { router } = require('../app')
 const Expense = require('../models/expense')
+const formatTime = require('../utils/date')
 
 const getDailyExpense = async (req, res) => {
     const currentDate = req.query.date
@@ -85,13 +85,13 @@ const postNewExpense = async (req, res) => {
 
 const deleteExpense = async (req, res) => {
     try {
-        const expense = await Expense.findOneAndDelete({ _id: req.params.expenseId, owner: req.user._id })
+        const expense = await Expense.findOne({ _id: req.params.expenseId, owner: req.user._id })
 
         if (!expense) {
             return res.status(404).send()
         }
 
-        return res.send(expense)
+        await expense.remove()
     } catch (e) {
         return res.status(404).send(e)
     }
