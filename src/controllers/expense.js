@@ -95,6 +95,7 @@ const deleteExpense = async (req, res) => {
         }
 
         await expense.remove()
+        res.send()
     } catch (e) {
         return res.status(404).send(e)
     }
