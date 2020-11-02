@@ -66,19 +66,23 @@ h2,
 .index_container {
     padding-top: 20px;
     max-width: 100%;
-    /* margin: 0 auto; */
+    min-height: 300px;
+    position: relative;
 }
 
 .items {
     width: 100%;
-    min-height: 300px;
+    min-height: 100%;
 }
 
 .item_empty {
-    width: 70%;
+    max-width: 100%;
     text-align: center;
-    margin: 100px auto;
+    margin: 10px auto;
     font-weight: bold;
+    position: absolute;
+    top: 90px;
+    left: 150px;
 }
 
 .item_empty span {
