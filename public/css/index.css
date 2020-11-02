@@ -24,7 +24,8 @@
     border: 1px solid #1f1f1f;
 }
 
-.btn_add {
+.btn_add,
+.today {
     flex-basis: 30%;
     height: 40px;
     border-radius: 20px;
@@ -33,12 +34,19 @@
     font-size: 1em;
 }
 
-.btn_add a {
+.today {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.btn_add a,
+.today a {
     color: #ffffff;
     text-decoration: none;
 }
 
-.btn_add:hover {
+.btn_add:hover,
+.today:hover {
     background-color: rgb(252, 125, 94);
     cursor: pointer;
 }
@@ -63,7 +71,7 @@ h2,
 
 .items {
     width: 100%;
-    min-height: 350px;
+    min-height: 300px;
 }
 
 .item_empty {

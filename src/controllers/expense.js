@@ -1,10 +1,11 @@
 const { validationResult } = require('express-validator')
 const Expense = require('../models/expense')
-const formatTime = require('../utils/date')
+const timeFormat = require('../utils/date')
 
 const getDailyExpense = async (req, res) => {
     const currentDate = req.query.date
     const { _id } = req.user
+    const today = timeFormat()
 
     if (!currentDate || !_id) {
         return res.redirect('/user/login', req.flash('warning', 'Client should log in first!'))
@@ -24,6 +25,7 @@ const getDailyExpense = async (req, res) => {
                 indexCSS: true,
                 currentDate,
                 sum: 0,
+                today,
             })
         }
 
@@ -42,6 +44,7 @@ const getDailyExpense = async (req, res) => {
             expense,
             currentDate,
             sum,
+            today,
         })
     } catch (e) {
         res.status(404).send(e)
