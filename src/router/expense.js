@@ -32,7 +32,7 @@ router.post(
     expenseController.postNewExpense
 )
 
-// router.patch('/:id', (req, res) => {})
+router.patch('/edit/:expenseId', expenseController.patchExpense)
 
 router.delete('/delete/:expenseId', expenseController.deleteExpense)
 

@@ -3,6 +3,7 @@
     <h2>{{isToday today currentDate}}</h2>
     <h3 class="sum">$ {{sum}}</h3>
     <button class="today btn-sm btn-rounded"><a href='/expense?date={{today}}'>Today</a></button>
+
     <nav>
         <button class="btn_add btn-sm btn-rounded"><a href='/expense/newExpense?date={{currentDate}}'>Add a New Expense</a></button>
         <input class="search_date" type="date">
@@ -22,9 +23,9 @@
                     <span id="amount">$ {{this.amount}}</span>
                     <span id="category">{{this.category}}</span>
                     <div class="operator">
-                        <span class="iconify" data-icon="clarity:edit-line" data-inline="false"></span>
+                        <span class="edit iconify" data-icon="clarity:edit-line" data-inline="false"></span>
                         <span class="delete iconify" data-icon="iwwa:delete" data-inline="false"></span>
-                        <input id="delete" type="hidden" value="{{this._id}}">
+                        <input id="id" type="hidden" value="{{this._id}}">
                     </div>
                 </div>
                 {{/each}}

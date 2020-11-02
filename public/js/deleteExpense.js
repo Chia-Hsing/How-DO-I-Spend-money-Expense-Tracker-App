@@ -1,6 +1,6 @@
 $(document).ready(
     $('.operator').on('click', '.delete', e => {
-        const ExpenseId = $(e.currentTarget).siblings('#delete').val()
+        const ExpenseId = $(e.currentTarget).siblings('#id').val()
 
         fetch(`/expense/delete/${ExpenseId}`, {
             method: 'delete',

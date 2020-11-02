@@ -86,6 +86,11 @@ const postNewExpense = async (req, res) => {
     }
 }
 
+const patchExpense = async (req, res) => {
+    try {
+    } catch (e) {}
+}
+
 const deleteExpense = async (req, res) => {
     try {
         const expense = await Expense.findOne({ _id: req.params.expenseId, owner: req.user._id })
@@ -103,7 +108,8 @@ const deleteExpense = async (req, res) => {
 
 module.exports = {
     getNewExpense,
-    postNewExpense,
     getDailyExpense,
+    postNewExpense,
+    patchExpense,
     deleteExpense,
 }
