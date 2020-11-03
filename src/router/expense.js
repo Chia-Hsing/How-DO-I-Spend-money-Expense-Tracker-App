@@ -8,7 +8,10 @@ require('../db/mongoose')
 const router = new express.Router()
 
 router.get('/', isAuthenticated, expenseController.getDailyExpense)
+
 router.get('/newExpense', expenseController.getNewExpense)
+
+router.get('/edit/:expenseId', expenseController.getEditExpense)
 
 router.post(
     '/newExpense',
