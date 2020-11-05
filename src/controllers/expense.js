@@ -11,7 +11,20 @@ const getDailyExpense = async (req, res) => {
         return res.redirect('/user/login', req.flash('warning', 'Client should log in first!'))
     }
 
+    const months = []
+
     try {
+        const expensesDate = await Expense.find({ owner: req.user._id }, 'date').sort({ date: 'asc' }).exec()
+
+        expensesDate.forEach(expenseDate => {
+            const month = expenseDate.date.split('-').slice(0, 2).join('-')
+            if (months.includes(month)) {
+                return
+            }
+
+            months.push(month)
+        })
+
         // use lean() to get plain old JavaScript objects not mongoose document class. If we are not executing a query and sending the results without modification, we should use lean().
         const expense = await Expense.find({ owner: { _id }, date: currentDate }).lean()
 
@@ -26,6 +39,7 @@ const getDailyExpense = async (req, res) => {
                 currentDate,
                 sum: 0,
                 today,
+                months,
             })
         }
 
@@ -45,6 +59,7 @@ const getDailyExpense = async (req, res) => {
             currentDate,
             sum,
             today,
+            months,
         })
     } catch (e) {
         res.status(400).send(e)
@@ -87,8 +102,9 @@ const getEditExpense = async (req, res) => {
 }
 
 const postNewExpense = async (req, res) => {
-    const expense = new Expense({ ...req.body, owner: req.user._id })
     const { name, amount, date, category, description } = req.body
+    const month = date.split('-').slice(0, 2).join('-')
+    const expense = new Expense({ ...req.body, owner: req.user._id, month })
     const result = validationResult(req)
 
     if (!result.isEmpty()) {

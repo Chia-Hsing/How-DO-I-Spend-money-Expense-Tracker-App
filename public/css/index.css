@@ -10,7 +10,7 @@
     box-shadow: 20px 20px 30px rgba(143, 143, 143, 0.541);
 }
 
-.index_wrap nav {
+.index_wrap .group-two {
     padding-top: 10px;
     border-top: 1px solid #000;
     display: flex;
@@ -19,9 +19,16 @@
 }
 
 .search_date {
+    height: 40px;
     flex-basis: 30%;
     border-radius: 5px;
     border: 1px solid #1f1f1f;
+}
+
+.group-one {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .btn_add,
@@ -35,8 +42,18 @@
 }
 
 .today {
-    width: 100px;
+    flex-basis: 20%;
     margin-bottom: 10px;
+}
+.search_month {
+    flex-basis: 10%;
+    border-radius: 5px;
+    border: 1px solid #1f1f1f;
+    font-weight: bold;
+}
+
+.search_month a {
+    color: #000;
 }
 
 .btn_add a,

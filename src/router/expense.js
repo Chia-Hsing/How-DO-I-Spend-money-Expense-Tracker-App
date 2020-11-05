@@ -35,6 +35,7 @@ router.post(
     expenseController.postNewExpense
 )
 
+// use methodOverride overwrite the post method to patch method
 router.post('/edit/:expenseId', methodOverride, expenseController.patchExpense)
 
 router.delete('/delete/:expenseId', expenseController.deleteExpense)

@@ -2,9 +2,25 @@
     
     <h2>{{isToday today currentDate}}</h2>
     <h3 class="sum">$ {{sum}}</h3>
-    <button class="today btn-sm btn-rounded"><a href='/expense?date={{today}}'>Today</a></button>
+    <nav class='group-one'>
+        <button class="today btn-sm btn-rounded"><a href='/expense?date={{today}}'>Today</a></button>
 
-    <nav>
+        <div name="month" class="dropdown show search_month">
+            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Month
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {{#each months}}
+                <a class="dropdown-item" href="/summary?month={{this}}">{{this}}</a>
+                {{/each}}
+            </div>
+        </div>
+    </nav>
+
+    
+
+    <nav class='group-two'>
         <button class="btn_add btn-sm btn-rounded"><a href='/expense/newExpense?date={{currentDate}}'>Add a New Expense</a></button>
         <input class="search_date" type="date">
     </nav>

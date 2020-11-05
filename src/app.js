@@ -3,6 +3,7 @@ const express = require('express')
 const userRouter = require('./router/user')
 const expenseRouter = require('./router/expense')
 const authRouter = require('./router/auth')
+const summaryRouter = require('./router/summary')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
@@ -99,11 +100,10 @@ app.use((req, res, next) => {
 app.use('/expense', expenseRouter)
 app.use('/user', userRouter)
 app.use('/auth', authRouter)
+app.use('/summary', summaryRouter)
 
 module.exports = app
 
-// delete
-// edit
 // monthly search
 // chart
 // reset pw
