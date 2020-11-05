@@ -4,7 +4,7 @@
   {{> notification}}
   
   <form {{#if isEditing}} action="/expense/edit/{{expenseId}}" {{else}} action="/expense/newExpense" {{/if}} method="post" class="needs-validation" novalidate>
-
+    <input type="hidden" name='__method' value='patch'>
     <div class="form-row">
       <div class="form-group row">
         <label for="form_name">Name</label>

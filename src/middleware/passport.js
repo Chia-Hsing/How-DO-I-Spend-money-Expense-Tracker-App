@@ -25,7 +25,7 @@ module.exports = passport => {
 
                     bcrypt.compare(password, user.password, (err, isMatch) => {
                         if (isMatch) {
-                            return done(null, user)
+                            return done(null, user, req.flash('success', 'Log in success!'))
                         }
                         return done(null, false, req.flash('warning', 'Invalid email address or password!'))
                     })

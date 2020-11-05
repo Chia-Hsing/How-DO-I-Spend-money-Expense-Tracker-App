@@ -57,7 +57,7 @@ const postSignup = async (req, res) => {
             req.flash('warning', 'Email address already exist, please log in!')
             return res.status(400).redirect('/user/login')
         }
-
+        req.flash('success', 'Sign up success!')
         // save user from request to database
         await user.save()
         return res.status(201).redirect('/user/login')

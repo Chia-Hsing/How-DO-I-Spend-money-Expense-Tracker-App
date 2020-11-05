@@ -64,6 +64,7 @@ const getNewExpense = (req, res) => {
 const getEditExpense = async (req, res) => {
     const expenseId = req.params.expenseId
     const currentDate = req.query.date
+
     try {
         const expense = await Expense.findById(expenseId).lean()
 
@@ -111,9 +112,32 @@ const postNewExpense = async (req, res) => {
 }
 
 const patchExpense = async (req, res) => {
+    const expenseId = req.params.expenseId
+    // const currentDate = req.query.date
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['__method', 'name', 'amount', 'date', 'category', 'description']
+    const isValidOperation = updates.every(update => {
+        return allowedUpdates.includes(update)
+    })
+
+    if (!isValidOperation) {
+        return res.status(404).send({ error: 'Invalid updates!' })
+    }
+
     try {
-        console.log(req.body)
-    } catch (e) {}
+        const expense = await Expense.findOne({ _id: expenseId, owner: req.user._id })
+
+        if (!expense) {
+            return res.status(404).send()
+        }
+
+        updates.forEach(update => (expense[update] = req.body[update]))
+        expense.save()
+        const currentDate = expense.date
+        return res.status(201).redirect(`/expense?date=${currentDate}`)
+    } catch (e) {
+        res.status(400).send(e)
+    }
 }
 
 const deleteExpense = async (req, res) => {

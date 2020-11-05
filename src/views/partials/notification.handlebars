@@ -19,3 +19,14 @@
     </button>
 </section>
 {{/each}}
+
+{{#if success}}
+<section class="notification alert alert-secondary" role="alert">
+    <em>
+        {{success}}
+    </em>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</section>
+{{/if }}

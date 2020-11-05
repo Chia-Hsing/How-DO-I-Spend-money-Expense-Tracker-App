@@ -1,8 +1,8 @@
 const express = require('express')
-const Expense = require('../models/expense')
 const expenseController = require('../controllers/expense')
 const { body } = require('express-validator')
 const isAuthenticated = require('../middleware/auth')
+const methodOverride = require('../middleware/method-override')
 require('../db/mongoose')
 
 const router = new express.Router()
@@ -35,7 +35,7 @@ router.post(
     expenseController.postNewExpense
 )
 
-router.patch('/edit/:expenseId', expenseController.patchExpense)
+router.post('/edit/:expenseId', methodOverride, expenseController.patchExpense)
 
 router.delete('/delete/:expenseId', expenseController.deleteExpense)
 
