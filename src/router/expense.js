@@ -18,7 +18,7 @@ router.post(
     [
         body('name').trim().isLength({ min: 1 }).withMessage('Expense name field is required!'),
         body('amount').trim().isInt({ min: 1 }).withMessage('Amount field must be a positive integer!'),
-        body('date').isISO8601().withMessage('Invalid date value!'),
+        // body('date').isISO8601().withMessage('Invalid date value!'),
         body('category')
             .isIn([
                 'food',

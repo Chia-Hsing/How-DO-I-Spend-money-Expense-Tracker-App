@@ -132,6 +132,17 @@ h2,
     justify-content: space-around;
 }
 
+.operator .edit,
+.operator .delete {
+    color: #000;
+    cursor: pointer;
+}
+
+.operator .edit:hover,
+.operator .delete:hover {
+    color: rgb(255, 81, 0);
+}
+
 .A {
     width: 350px;
     height: 350px;
