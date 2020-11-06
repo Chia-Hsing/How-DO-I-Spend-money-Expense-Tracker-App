@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator')
 const Expense = require('../models/expense')
+const User = require('../models/user')
 const timeFormat = require('../utils/date')
 
 const getDailyExpense = async (req, res) => {
@@ -11,20 +12,9 @@ const getDailyExpense = async (req, res) => {
         return res.redirect('/user/login', req.flash('warning', 'Client should log in first!'))
     }
 
-    const months = []
-
     try {
-        const expensesDate = await Expense.find({ owner: req.user._id }, 'date').sort({ date: 'asc' }).exec()
-
-        expensesDate.forEach(expenseDate => {
-            const month = expenseDate.date.split('-').slice(0, 2).join('-')
-            if (months.includes(month)) {
-                return
-            }
-
-            months.push(month)
-        })
-
+        // use the Schema.statics to set up the method for Expense model
+        const months = await Expense.getMonths(_id)
         // use lean() to get plain old JavaScript objects not mongoose document class. If we are not executing a query and sending the results without modification, we should use lean().
         const expense = await Expense.find({ owner: { _id }, date: currentDate }).lean()
 

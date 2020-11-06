@@ -1,6 +1,10 @@
 <main class='index_wrap'>
-    
+    {{> notification}}
+    {{#if month}}
+    <h2>{{month}}</h2>
+    {{else}}
     <h2>{{isToday today currentDate}}</h2>
+    {{/if}}
     <h3 class="sum">$ {{sum}}</h3>
     <nav class='group-one'>
         <button class="today btn-sm btn-rounded"><a href='/expense?date={{today}}'>Today</a></button>
@@ -21,17 +25,24 @@
     
 
     <nav class='group-two'>
+        {{#unless chartJS}}
         <button class="btn_add btn-sm btn-rounded"><a href='/expense/newExpense?date={{currentDate}}'>Add a New Expense</a></button>
+        {{/unless}}
         <input class="search_date" type="date">
     </nav>
         <section class='index_container'>
             <div class='items'>
+            {{#if chartJS}}
+            <div class="chart">
+                  <canvas id="myChart"></canvas>
+            </div>
+            {{/if}}
             {{#if noExpense}}
             <div class='item_empty'>
                 <span>You did not spend any money yet!</span>
             </div>
             {{else}}
-
+            
                 {{#each expense}}
                 <div class='item'>
                     {{#categoryIcon this.category}}{{/categoryIcon}}

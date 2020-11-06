@@ -80,11 +80,17 @@ h2,
     color: rgb(255, 81, 0);
 }
 
-.index_container {
+.index_container,
+.chart {
     padding-top: 20px;
     max-width: 100%;
     min-height: 300px;
     position: relative;
+}
+
+.chart #myChart {
+    max-width: 100%;
+    min-height: auto;
 }
 
 .items {
