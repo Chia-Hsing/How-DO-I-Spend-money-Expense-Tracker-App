@@ -1,0 +1,23 @@
+<main class="form-wrap container-fluid">
+  <h2 class='title_signup'>Reset Password</h2>
+  {{> notification}}
+  <form action="/user/signup" method="post" class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="form-group row">
+        <label for="form_username">Username</label>
+        <input type="text" name="username" class="form-control" id="form_username"   placeholder="Username" value="{{user.username}}" required>
+        <div class="valid-feedback">
+          Good!
+        </div>
+        <div class="invalid-feedback">
+          Invalid username!
+        </div>
+      </div>
+  </form>
+  <div class="form_aside">
+    <aside><span>Have a account? </span><a href="/user/login"><strong>Log in</strong></a></aside>
+  </div>
+</main>
+
+
+

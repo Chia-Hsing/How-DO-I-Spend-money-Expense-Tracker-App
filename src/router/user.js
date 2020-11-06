@@ -9,6 +9,7 @@ const router = new express.Router()
 router.get('/signup', userController.getSignup)
 router.get('/login', userController.getLogin)
 router.get('/logout', userController.getLogout)
+router.get('/resetPW', userController.getResetPassword)
 
 router.post(
     '/signup',

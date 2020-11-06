@@ -7,8 +7,8 @@ const summaryRouter = require('./router/summary')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
-const flash = require('connect-flash')
 const exphbs = require('express-handlebars')
+const flash = require('connect-flash')
 const timeFormat = require('./utils/date')
 
 // database connection
@@ -104,7 +104,5 @@ app.use('/summary', summaryRouter)
 
 module.exports = app
 
-// monthly search
-// chart
 // reset pw
 // csrf

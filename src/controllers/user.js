@@ -27,8 +27,11 @@ const getLogout = (req, res) => {
     return res.redirect('/user/login')
 }
 
-// const getNewPassword = async (req, res) => {}
-// const getResetPassword = async (req, res) => {}
+// const getNewPassword = async (req, res) => {
+// }
+const getResetPassword = async (req, res) => {
+    res.render('resetPW')
+}
 
 // user signup handler
 const postSignup = async (req, res) => {
@@ -78,5 +81,5 @@ module.exports = {
     getLogin,
     getLogout,
     // getNewPassword,
-    // getResetPassword,
+    getResetPassword,
 }
