@@ -1,22 +1,25 @@
 <main class="form-wrap container-fluid">
-  <h2 class='title_signup'>Reset Password</h2>
-  {{> notification}}
-  <form action="/user/signup" method="post" class="needs-validation" novalidate>
-    <div class="form-row">
-      <div class="form-group row">
-        <label for="form_username">Username</label>
-        <input type="text" name="username" class="form-control" id="form_username"   placeholder="Username" value="{{user.username}}" required>
-        <div class="valid-feedback">
-          Good!
+        <h2 class='title_reset'>Reset Password</h2>
+   
+    {{> notification}}
+
+    <form action="/user/resetPW" method="post" class="needs-validation" novalidate>
+        <div class="form-row">
+            <div class="form-group row">
+                <label for="form_email">Email</label>
+                <input type="email" name="email" class="form-control" id="form_email" placeholder="Email Address" value="{{user.email}}" required>  
+                <div class="valid-feedback">
+                  Good!
+                </div>
+                <div class="invalid-feedback">
+                  Invalid email!
+                </div>
+            </div>
         </div>
-        <div class="invalid-feedback">
-          Invalid username!
-        </div>
-      </div>
-  </form>
-  <div class="form_aside">
-    <aside><span>Have a account? </span><a href="/user/login"><strong>Log in</strong></a></aside>
-  </div>
+        <div class="btn_group">
+            <button class="btn_reset btn-primary btn-sm btn-rounded" type="submit">Submit</button>
+        </div>  
+    </form>
 </main>
 
 

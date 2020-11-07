@@ -1,0 +1,36 @@
+<main class="form-wrap container-fluid">
+        <h2 class='title_reset'>Set a New Password</h2>
+   
+    {{> notification}}
+
+    <form action='/user/newPW' method="post" class="needs-validation" novalidate>
+        <input type="hidden" name='userID' value="{{user._id}}">
+        <input type="hidden" name='__method' value='patch'>
+        <div class="form-group row">
+        <label for="form_password">New Password</label>
+        <input type="password" name="password" class="form-control" id="form_password" placeholder="password" pattern="^\S{8,12}$" required>
+        <div class="valid-feedback">
+          Good!
+        </div>
+        <div class="invalid-feedback">
+          Please provide a valid password!
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="form_password_recheck">Confirm Password</label>
+        <input type="password" name="password__recheck" class="form-control" id="form_password_recheck" placeholder="confirm password" required>
+        <div class="valid-feedback">
+          Good!
+        </div>
+        <div class="invalid-feedback">
+          Password does not match.
+        </div>
+      </div>
+        <div class="btn_group">
+            <button class="btn_reset btn-primary btn-sm btn-rounded" type="submit">Submit</button>
+        </div>  
+    </form>
+</main>
+
+
+

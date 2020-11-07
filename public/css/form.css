@@ -21,7 +21,8 @@
 }
 
 .form-wrap .title_signup,
-.form-wrap .title_login {
+.form-wrap .title_login,
+.form-wrap .title_reset {
     grid-column: 1 / span 2;
     margin: 0 auto;
     display: inline-block;
@@ -85,7 +86,8 @@ input.form-control:focus {
 
 .btn_signup,
 .btn_login,
-.btn_fb {
+.btn_fb,
+.btn_reset {
     flex-basis: 40%;
     height: 40px;
     border-radius: 20px;
@@ -107,7 +109,8 @@ input.form-control:focus {
 
 .btn_signup:hover,
 .btn_login:hover,
-.btn_fb:hover {
+.btn_fb:hover,
+.btn_reset:hover {
     background-color: rgb(252, 125, 94);
     cursor: pointer;
 }

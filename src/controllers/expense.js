@@ -3,11 +3,13 @@ const Expense = require('../models/expense')
 const User = require('../models/user')
 const timeFormat = require('../utils/date')
 
+// get daily expense page
 const getDailyExpense = async (req, res) => {
     const currentDate = req.query.date
-    const { _id } = req.user
     const today = timeFormat()
+    const { _id } = req.user
 
+    // if there is no date search query or user id
     if (!currentDate || !_id) {
         return res.redirect('/user/login', req.flash('warning', 'Client should log in first!'))
     }
@@ -20,6 +22,7 @@ const getDailyExpense = async (req, res) => {
 
         let sum
 
+        // if there is no expense at that day
         if (expense.length === 0) {
             return res.render('index', {
                 noExpense: true,
@@ -33,6 +36,7 @@ const getDailyExpense = async (req, res) => {
             })
         }
 
+        // calculate the sum of the daily expense
         sum = expense
             .map(obj => {
                 return obj.amount
@@ -56,8 +60,11 @@ const getDailyExpense = async (req, res) => {
     }
 }
 
+// get adding new expense page
 const getNewExpense = (req, res) => {
+    // for daily expense adding request
     const currentDate = req.query.date
+
     res.render('addExpense', {
         formCSS: true,
         validationFormJS: true,
@@ -66,17 +73,23 @@ const getNewExpense = (req, res) => {
     })
 }
 
+// get editing expense page
 const getEditExpense = async (req, res) => {
+    // get the expense specific id
     const expenseId = req.params.expenseId
+    // for the specific date
     const currentDate = req.query.date
 
     try {
+        // get that expense form database
         const expense = await Expense.findById(expenseId).lean()
 
+        // if the expense does not exist
         if (!expense) {
             return res.status(404).send()
         }
 
+        // if it does exist
         res.render('addExpense', {
             formCSS: true,
             validationFormJS: true,
@@ -91,8 +104,11 @@ const getEditExpense = async (req, res) => {
     }
 }
 
+// post new expense handler
 const postNewExpense = async (req, res) => {
+    // req.body destructuring
     const { name, amount, date, category, description } = req.body
+    // get month
     const month = date.split('-').slice(0, 2).join('-')
     const expense = new Expense({ ...req.body, owner: req.user._id, month })
     const result = validationResult(req)
@@ -117,9 +133,11 @@ const postNewExpense = async (req, res) => {
     }
 }
 
+// edit existing expense handler
 const patchExpense = async (req, res) => {
+    // get specific expense id
     const expenseId = req.params.expenseId
-    // const currentDate = req.query.date
+    // get the expense object keys
     const updates = Object.keys(req.body)
     const allowedUpdates = ['__method', 'name', 'amount', 'date', 'category', 'description']
     const isValidOperation = updates.every(update => {
@@ -146,6 +164,7 @@ const patchExpense = async (req, res) => {
     }
 }
 
+// delete existing expense handler
 const deleteExpense = async (req, res) => {
     try {
         const expense = await Expense.findOne({ _id: req.params.expenseId, owner: req.user._id })

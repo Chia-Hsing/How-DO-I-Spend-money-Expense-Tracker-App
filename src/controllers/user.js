@@ -1,5 +1,7 @@
 const User = require('../models/user')
 const { validationResult } = require('express-validator')
+const crypto = require('crypto')
+const sendResetPWEmail = require('../utils/sendMail')
 
 // get signup page
 const getSignup = (req, res) => {
@@ -27,10 +29,29 @@ const getLogout = (req, res) => {
     return res.redirect('/user/login')
 }
 
-// const getNewPassword = async (req, res) => {
-// }
+// get reset password page
 const getResetPassword = async (req, res) => {
-    res.render('resetPW')
+    res.render('resetPW', { formCSS: true, validationFormJS: true })
+}
+
+const getNewPassword = async (req, res) => {
+    const token = req.params.token
+
+    const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+    }).lean()
+
+    if (!user) {
+        req.flash('refuse', 'Password reset token is invalid or has expired.')
+        return res.redirect('/user/resetPW')
+    }
+
+    res.render('newPW', {
+        formCSS: true,
+        validationFormJS: true,
+        user,
+    })
 }
 
 // user signup handler
@@ -55,10 +76,10 @@ const postSignup = async (req, res) => {
     }
 
     try {
-        const email = await User.findOne({ email: req.body.email })
-        if (email) {
+        const existingUser = await User.findOne({ email: req.body.email })
+        if (existingUser) {
             req.flash('warning', 'Email address already exist, please log in!')
-            return res.status(400).redirect('/user/login')
+            return res.redirect('/user/login')
         }
         req.flash('success', 'Sign up success!')
         // save user from request to database
@@ -70,16 +91,80 @@ const postSignup = async (req, res) => {
     }
 }
 
-// const postNewPassword = async (req, res) => {}
-// const postResetPassword = async (req, res) => {}
+const postResetPassword = async (req, res) => {
+    try {
+        // crypto library is part of Node.js. We will be using it for generating random token during a password reset.
+        const buf = crypto.randomBytes(20)
+        const token = buf.toString('hex')
+
+        const user = await User.findOne({ email: req.body.email })
+
+        if (!user) {
+            req.flash('refuse', 'This email address does not be register before, please sign up!')
+            return res.redirect('/user/signup')
+        }
+
+        user.resetPasswordToken = token
+        // expired after 10 minutes
+        user.resetPasswordExpires = Date.now() + 600000
+
+        await user.save()
+
+        const sender = 'ausgeflippte@gmail.com'
+        const receiver = user.email
+        sendResetPWEmail(sender, receiver, token)
+
+        req.flash('success', `An email has been sent to ${user.email}.`)
+        return res.redirect('/user/login')
+    } catch (e) {
+        res.status(400).send(e)
+        return res.redirect('/user/login')
+    }
+}
+
+const postNewPassword = async (req, res) => {
+    const { password, userID } = req.body
+    const result = validationResult(req)
+
+    if (!result.isEmpty()) {
+        return res.render('/user/newPW', {
+            formCSS: true,
+            validationFormJS: true,
+            errors: result.array(),
+        })
+    }
+
+    try {
+        const user = await User.findOne({
+            _id: userID,
+            resetPasswordExpires: { $gt: Date.now() },
+        })
+
+        if (!user) {
+            req.flash('refuse', 'Password reset token is invalid or has expired.')
+            return res.redirect('/user/login')
+        }
+
+        user.password = password
+        user.resetPasswordToken = null
+        user.resetPasswordExpires = null
+
+        await user.save()
+        req.flash('success', 'The password has been reset successfully!')
+        return res.redirect('/user/login')
+    } catch (e) {
+        res.status(400).send(e)
+        return res.redirect('/user/login')
+    }
+}
 
 module.exports = {
     postSignup,
-    // postNewPassword,
-    // postResetPassword,
+    postNewPassword,
+    postResetPassword,
     getSignup,
     getLogin,
     getLogout,
-    // getNewPassword,
+    getNewPassword,
     getResetPassword,
 }

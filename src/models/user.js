@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcryptjs = require('bcryptjs')
+const bcrypt = require('bcryptjs')
 
 const userSchema = new mongoose.Schema(
     {
@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        resetPasswordToken: String,
+        resetPasswordExpires: Date,
     },
     {
         timestamps: true,
@@ -24,9 +26,13 @@ const userSchema = new mongoose.Schema(
 )
 
 // transform password from string to hash before the data stored to database
-userSchema.pre('save', async function () {
+userSchema.pre('save', async function (next) {
     const user = this
-    user.password = await bcryptjs.hash(user.password, 8)
+
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+    next()
 })
 
 const User = mongoose.model('User', userSchema)
