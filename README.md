@@ -6,6 +6,10 @@ A web expense tracker app built with Express and node.js runtime, which possess 
 
 [How-DO-I-SPEND-MONEY](https://chia-expense-tracker-app.herokuapp.com/user/login)
 
+### Test Users
+
+email: test1@example.com | password: 11111111
+
 ## Development stack
 
 -   Use MVC framework as the application design model.
