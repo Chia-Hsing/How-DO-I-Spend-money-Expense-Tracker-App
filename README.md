@@ -17,6 +17,7 @@ A web expense tracker app built with Express and node.js runtime, which possess 
 -   Use [chart.js](https://www.chartjs.org/) for monthly expenses chart display.
 -   Use [SendGrid](https://sendgrid.com/) service and [nodemailer](https://nodemailer.com/about/) to send password resetting email.
 -   Use [csurf](https://www.npmjs.com/package/csurf) as the Node.js CSRF protection middleware to prevent CSRF attack.
+-   Use Heroku as the deployment environment.
 
 ## App Display
 
