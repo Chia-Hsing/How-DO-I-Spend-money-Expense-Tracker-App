@@ -13,7 +13,7 @@ A web expense tracker app built with Express and node.js runtime, which possess 
 -   Use [mongoose](https://mongoosejs.com/) as Object Data Modeling (ODM) library for MongoDB.
 -   Use [MongoDB](https://www.mongodb.com/) as the database.
 -   Use [handlebars](https://handlebarsjs.com/) as the templating engine for frontend views.
--   Use [Passport](http://www.passportjs.org/)(local and Facebook strategies) as authentication middleware for Node.js for membership management.
+-   Use [Passport](http://www.passportjs.org/)(local and Facebook strategies) as authentication middleware for membership management.
 -   Use [chart.js](https://www.chartjs.org/) for monthly expenses chart display.
 -   Use [SendGrid](https://sendgrid.com/) service and [nodemailer](https://nodemailer.com/about/) to send password resetting email.
 -   Use [csurf](https://www.npmjs.com/package/csurf) as the Node.js CSRF protection middleware to prevent CSRF attack.
