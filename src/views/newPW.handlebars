@@ -6,6 +6,7 @@
     <form action='/user/newPW' method="post" class="needs-validation" novalidate>
         <input type="hidden" name='userID' value="{{user._id}}">
         <input type="hidden" name='__method' value='patch'>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="form-group row">
         <label for="form_password">New Password</label>
         <input type="password" name="password" class="form-control" id="form_password" placeholder="password" pattern="^\S{8,12}$" required>

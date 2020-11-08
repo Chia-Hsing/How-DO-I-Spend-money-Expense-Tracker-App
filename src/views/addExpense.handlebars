@@ -5,6 +5,7 @@
   
   <form {{#if isEditing}} action="/expense/edit/{{expenseId}}" {{else}} action="/expense/newExpense" {{/if}} method="post" class="needs-validation" novalidate>
     <input type="hidden" name='__method' value='patch'>
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div class="form-row">
       <div class="form-group row">
         <label for="form_name">Name</label>
@@ -18,7 +19,7 @@
       </div>
       <div class="form-group row">
         <label for="form_amount">Amount</label>
-        <input type="number" name="amount" class="form-control" id="form_amount" value="{{expense.amount}}" placeholder="Amount" required>
+        <input type="number" name="amount" class="form-control" id="form_amount" value="{{expense.amount}}" min="1" max="99999999" placeholder="Amount" required>
         <div class="valid-feedback">
           Good!
         </div>
@@ -49,10 +50,6 @@
         <div class="invalid-feedback">
           Must choose one category.
         </div>
-      </div>
-      <div class="form-group row">
-        <label for="form_description">Description</label>
-        <textarea type="text" name="description" class="form-control" id="form_description" value="{{expense.description}}"></textarea>
       </div>
     </div>
     </div>

@@ -9,7 +9,7 @@ const getSignup = (req, res) => {
         // should signup stylesheet and validation function apply?
         formCSS: true,
         validationFormJS: true,
-        signUpDecorationCSS: true,
+        decorationOneCSS: true,
     })
 }
 
@@ -19,7 +19,7 @@ const getLogin = (req, res) => {
         // should login stylesheet and validation function apply?
         formCSS: true,
         validationFormJS: true,
-        logInDecorationCSS: true,
+        decorationTwoCSS: true,
     })
 }
 
@@ -31,7 +31,11 @@ const getLogout = (req, res) => {
 
 // get reset password page
 const getResetPassword = async (req, res) => {
-    res.render('resetPW', { formCSS: true, validationFormJS: true })
+    res.render('resetPW', {
+        formCSS: true,
+        validationFormJS: true,
+        decorationOneCSS: true,
+    })
 }
 
 const getNewPassword = async (req, res) => {
@@ -50,6 +54,7 @@ const getNewPassword = async (req, res) => {
     res.render('newPW', {
         formCSS: true,
         validationFormJS: true,
+        decorationTwoCSS: true,
         user,
     })
 }
@@ -130,6 +135,7 @@ const postNewPassword = async (req, res) => {
         return res.render('/user/newPW', {
             formCSS: true,
             validationFormJS: true,
+            decorationTwoCSS: true,
             errors: result.array(),
         })
     }

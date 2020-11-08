@@ -13,9 +13,15 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                {{#each months}}
-                <a class="dropdown-item" href="/summary?month={{this}}">{{this}}</a>
-                {{/each}}
+                {{#if months}}
+                    {{#each months}}
+                    <a class="dropdown-item" href="/summary?month={{this}}">{{this}}</a>
+                    {{/each}}
+
+                    {{else}}
+
+                    <a class="dropdown-item" disabled>no expense</a>
+                {{/if}}
             </div>
         </div>
         <button class="today btn-sm btn-rounded"><a href='/expense?date={{today}}'>Today</a></button>

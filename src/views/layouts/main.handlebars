@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{csrfToken}}">
         <title>How I Spend Money</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;700&display=swap" rel="stylesheet">
@@ -13,18 +14,16 @@
         {{#if indexCSS}}
         <link rel="stylesheet" href="/css/index.css">
         {{/if }}
-        {{#if logInDecorationCSS}}
-        <link rel="stylesheet" href="/css/loginDeco.css">
+        {{#if decorationOneCSS}}
+        <link rel="stylesheet" href="/css/decoOne.css">
         {{/if}}
-        {{#if signUpDecorationCSS}}
-        <link rel="stylesheet" href="/css/signupDeco.css">
+        {{#if decorationTwoCSS}}
+        <link rel="stylesheet" href="/css/decoTwo.css">
         {{/if}}
 
     </head>
     <body>
-        {{!-- <nav class="nav">
-            <h4 class="title"><a href="/user/login">How I Spend Money</a></h4>
-        </nav> --}}
+        
         <div class="A"></div>
         <div class="B"></div>
         <div class="C"></div>
@@ -36,9 +35,7 @@
         </nav>
         {{/if}}
 
-
         {{{body}}}
-
 
         <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

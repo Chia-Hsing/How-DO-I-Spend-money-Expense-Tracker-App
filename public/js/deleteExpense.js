@@ -1,8 +1,16 @@
 $(document).ready(
     $('.operator').on('click', '.delete', e => {
         const ExpenseId = $(e.currentTarget).siblings('#id').val()
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+        console.log(token)
 
         fetch(`/expense/delete/${ExpenseId}`, {
+            credentials: 'same-origin',
+            // attach the csrf token in header
+            headers: {
+                'CSRF-Token': token,
+            },
             method: 'delete',
             redirect: 'follow',
         }).then(res => {

@@ -68,7 +68,7 @@ const getNewExpense = (req, res) => {
     res.render('addExpense', {
         formCSS: true,
         validationFormJS: true,
-        signUpDecorationCSS: true,
+        decorationOneCSS: true,
         currentDate,
     })
 }
@@ -93,7 +93,7 @@ const getEditExpense = async (req, res) => {
         res.render('addExpense', {
             formCSS: true,
             validationFormJS: true,
-            signUpDecorationCSS: true,
+            decorationTwoCSS: true,
             isEditing: true,
             expenseId,
             currentDate,
@@ -107,19 +107,21 @@ const getEditExpense = async (req, res) => {
 // post new expense handler
 const postNewExpense = async (req, res) => {
     // req.body destructuring
-    const { name, amount, date, category, description } = req.body
+    const { name, amount, date, category } = req.body
     // get month
     const month = date.split('-').slice(0, 2).join('-')
     const expense = new Expense({ ...req.body, owner: req.user._id, month })
     const result = validationResult(req)
+    const currentDate = date
 
     if (!result.isEmpty()) {
         return res.status(400).render('addExpense', {
             errors: result.array(),
-            expense: { name, amount, date, category, description },
+            expense: { name, amount, date, category },
             formCSS: true,
             validationFormJS: true,
-            signUpDecorationCSS: true,
+            decorationOneCSS: true,
+            currentDate,
         })
     }
 
@@ -139,7 +141,7 @@ const patchExpense = async (req, res) => {
     const expenseId = req.params.expenseId
     // get the expense object keys
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['__method', 'name', 'amount', 'date', 'category', 'description']
+    const allowedUpdates = ['__method', '_csrf', 'name', 'amount', 'date', 'category']
     const isValidOperation = updates.every(update => {
         return allowedUpdates.includes(update)
     })

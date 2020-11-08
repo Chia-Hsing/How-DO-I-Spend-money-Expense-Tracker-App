@@ -9,6 +9,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const exphbs = require('express-handlebars')
+const csrf = require('csurf')
 const flash = require('connect-flash')
 const timeFormat = require('./utils/date')
 
@@ -18,6 +19,8 @@ require('./db/mongoose')
 require('./middleware/passport')(passport)
 
 const app = express()
+
+const csrfProtection = csrf({ cookie: true })
 
 // handlebars initialized setting
 const viewsPath = path.join(__dirname, './views')
@@ -86,6 +89,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+// apply csurf
+app.use(csrfProtection)
+
 // passport session initialized setting
 app.use(passport.initialize())
 app.use(passport.session())
@@ -100,6 +106,7 @@ app.use((req, res, next) => {
     res.locals.warning = req.flash('warning')
     res.locals.success = req.flash('success')
     res.locals.refuse = req.flash('refuse')
+    res.locals.csrfToken = req.csrfToken()
     next()
 })
 
@@ -109,7 +116,8 @@ app.use('/user', userRouter)
 app.use('/auth', authRouter)
 app.use('/summary', summaryRouter)
 
-module.exports = app
+app.get('*', (req, res) => {
+    res.render('error', { decorationOneCSS: true })
+})
 
-// reset pw
-// csrf
+module.exports = app

@@ -18,9 +18,6 @@ const expenseSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: {
-        type: String,
-    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

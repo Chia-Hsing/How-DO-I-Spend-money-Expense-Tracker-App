@@ -4,6 +4,7 @@
     {{> notification}}
 
     <form action="/user/resetPW" method="post" class="needs-validation" novalidate>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="form-row">
             <div class="form-group row">
                 <label for="form_email">Email</label>
