@@ -1,4 +1,4 @@
-# How-I-Spend-Money (Expense-Tracker-App)
+# How-DO-I-Spend-Money (Expense-Tracker-App)
 
 A web expense tracker app built with Express and node.js runtime, which possess the basic function of CRUD operations. Also, it uses mongoose ODM and MongoDB for daily expenses records storage and employs passport.js for client management. (signup, login, and third party platform log in)
 
